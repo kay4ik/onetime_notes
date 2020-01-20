@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "548770097903",
+    "firebase_url": "https://onetime-notes.firebaseio.com",
+    "project_id": "onetime-notes",
+    "storage_bucket": "onetime-notes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548770097903:android:362c869a78de8b9232c91a",
+        "android_client_info": {
+          "package_name": "de.zoey.onetime_notes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548770097903-mhlcppm27g08m24udnna5avklh78nmm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBruHEleA5cXjMK-wpcheESdol6Qerg5IY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548770097903-mhlcppm27g08m24udnna5avklh78nmm0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "548770097903-2c094a73krut5v63975cv82bpvjtcm87.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.zoey.onetimeNotes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
