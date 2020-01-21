@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:onetime_notes/services/userRepository.dart';
+import 'package:onetime_notes/views/read/enteridpage.dart';
 
 class Splashscreen extends StatefulWidget {
-  Splashscreen({Key key}) : super(key: key);
+  final Uri link;
+  Splashscreen({Key key, this.link}) : super(key: key);
 
   @override
   _SplashscreenState createState() => _SplashscreenState();
@@ -15,6 +17,13 @@ class _SplashscreenState extends State<Splashscreen> {
     this._init().then((_) {
       Future.delayed(Duration(milliseconds: 1300)).then((_) {
         Navigator.of(context).pushReplacementNamed("/start");
+        if (widget.link != null) {
+          print("RECIVED!!! App opened with link: " + widget.link.toString());
+          var id = widget.link.queryParameters["id"];
+          print("ID IS:" + id);
+          var route = MaterialPageRoute(builder: (_) => EnterIDpage(id: id));
+          Navigator.of(context).push(route);
+        } 
       });
     });
   }

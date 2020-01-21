@@ -1,10 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:onetime_notes/services/database.dart';
 import 'package:onetime_notes/views/read/viewnotepage.dart';
 
 class EnterIDpage extends StatefulWidget {
-  EnterIDpage({Key key}) : super(key: key);
+  final String id;
+  EnterIDpage({Key key, this.id}) : super(key: key);
 
   @override
   _EnterIDpageState createState() => _EnterIDpageState();
@@ -12,6 +15,7 @@ class EnterIDpage extends StatefulWidget {
 
 class _EnterIDpageState extends State<EnterIDpage> {
   var _loading = false;
+  var _notified = false;
   var _controller = TextEditingController();
   final _scaffold = GlobalKey<ScaffoldState>();
 
@@ -19,10 +23,14 @@ class _EnterIDpageState extends State<EnterIDpage> {
   void initState() {
     super.initState();
     _controller.addListener(() => setState((){}));
+    if (widget.id != null) {
+      _controller.text = widget.id;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    _checkNotification();
     return Scaffold(
       key: _scaffold,
       appBar: AppBar(
@@ -116,5 +124,18 @@ class _EnterIDpageState extends State<EnterIDpage> {
     setState(() {
       _loading = false;
     });
+  }
+
+  void _checkNotification() {
+    if (widget.id != null && !_notified) {
+      var snackbar = SnackBar(
+        content: Text("ID erfolgreich eingefügt!"),
+        backgroundColor: Theme.of(context).accentColor,
+      );
+      Timer(const Duration(milliseconds: 500), () {
+        _scaffold.currentState.showSnackBar(snackbar);
+      });
+      _notified = true;
+    }
   }
 }
