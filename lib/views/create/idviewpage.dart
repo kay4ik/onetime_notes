@@ -1,5 +1,7 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:onetime_notes/link.dart';
 import 'package:share/share.dart';
 
 class IDViewpage extends StatefulWidget {
@@ -27,12 +29,15 @@ class _IDViewpageState extends State<IDViewpage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Card(
+              margin: EdgeInsets.all(0),
               child: ListTile(
                 leading: Icon(Icons.title),
                 title: Text(widget.subject),
               ),
             ),
+            SizedBox(height: 8),
             Card(
+              margin: EdgeInsets.all(0),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -41,22 +46,22 @@ class _IDViewpageState extends State<IDViewpage> {
                       leading: Icon(Icons.assignment),
                       title: SelectableText(
                         widget.id,
-                        style: Theme.of(context)
-                            .textTheme
-                            .title
-                            .merge(TextStyle(color: Colors.blue)),
+                        style: Theme.of(context).textTheme.title.merge(
+                            TextStyle(color: Theme.of(context).accentColor)),
                       ),
                     ),
                     SizedBox(height: 8),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        IconButton(
+                        OutlineButton.icon(
                           icon: Icon(Icons.content_copy),
+                          label: Text("ID kopieren"),
                           onPressed: copy,
                         ),
-                        IconButton(
+                        RaisedButton.icon(
                           icon: Icon(Icons.share),
+                          label: Text("Link teilen"),
                           onPressed: share,
                         ),
                       ],
@@ -67,7 +72,7 @@ class _IDViewpageState extends State<IDViewpage> {
             ),
             SizedBox(height: 8),
             Text(
-              "Sende die ID an den Empfänger! Die Nachricht wird gelöscht sobald die Nachricht vom Empfänger geöffnet wird.",
+              "Sende die ID oder den Link an den Empfänger! Die Nachricht wird gelöscht sobald die Nachricht vom Empfänger geöffnet wird.",
             )
           ],
         ),
@@ -86,8 +91,21 @@ class _IDViewpageState extends State<IDViewpage> {
   }
 
   void share() async {
+    final params = DynamicLinkParameters(
+      androidParameters: androidParams,
+      iosParameters: iosParams,
+      socialMetaTagParameters: socialMetaParams,
+      uriPrefix: uriPrefix,
+      link: Uri.parse("https://otn.thezoey.de/note?id=" + widget.id),
+      dynamicLinkParametersOptions: DynamicLinkParametersOptions(
+        shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short,
+      ),
+    );
+    var link = await params.buildShortLink();
     await Share.share(
-      "Die ID der Nachricht ist: " + widget.id,
+      link.shortUrl.toString() +
+          " \nSolltest du Probleme beim öffnen des Links haben, lade dir die onetimenotes App und öffne diese ID: " +
+          widget.id,
       subject: "Neue Ontime Notiz erstellt!",
     );
   }
