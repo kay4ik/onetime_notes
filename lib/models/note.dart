@@ -6,8 +6,16 @@ class Note {
   String content;
   String userid;
   DateTime create;
+  bool crypted = false;
 
-  Note({this.subject, this.content, this.create, this.userid, this.id});
+  Note({
+    this.subject,
+    this.content,
+    this.create,
+    this.userid,
+    this.id,
+    this.crypted,
+  });
 
   factory Note.fromDocument(Map<String, dynamic> document, [String id]) {
     if (document != null) {
@@ -17,9 +25,10 @@ class Note {
         content: document["content"],
         create: DateTime.parse(document["creation"]),
         userid: document["userid"] ?? "",
+        crypted: document["crypted"] ?? false,
       );
-    }
-    else return null;
+    } else
+      return null;
   }
 
   Map<String, dynamic> toDocument() {
@@ -28,6 +37,7 @@ class Note {
       "content": content,
       "creation": create.toString(),
       "userid": userid,
+      "crypted": crypted,
     };
   }
 }
