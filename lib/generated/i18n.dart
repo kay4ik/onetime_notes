@@ -34,6 +34,8 @@ class I18n implements WidgetsLocalizations {
 
   /// "Onetime Notes"
   String get appTitle => "Onetime Notes";
+  /// "Abbrechen"
+  String get cancel => "Abbrechen";
   /// "ID kopiert!"
   String get copiedID => "ID kopiert!";
   /// "ID kopieren"
@@ -92,10 +94,14 @@ class I18n implements WidgetsLocalizations {
   String get password => "Passwort";
   /// "Datenschutz"
   String get sData => "Datenschutz";
-  /// "Nutzerdaten löschen"
-  String get sDataDeleteUser => "Nutzerdaten löschen";
+  /// "Nutzerdaten erneuern"
+  String get sDataRefreshUser => "Nutzerdaten erneuern";
   /// "Nutzer ID erstellen"
   String get sDataUserID => "Nutzer ID erstellen";
+  /// "Um diese einstellungen vorzunehmen muss die App neu gestartet werden. Okay?"
+  String get sRestartAlertContent => "Um diese einstellungen vorzunehmen muss die App neu gestartet werden. Okay?";
+  /// "App wird neu gestartet"
+  String get sRestartAlertTitle => "App wird neu gestartet";
   /// "Theme auswählen"
   String get sThemeSelect => "Theme auswählen";
   /// "Darstellungsoptionen"
@@ -108,6 +114,8 @@ class I18n implements WidgetsLocalizations {
   String get show => "Anzeigen";
   /// "Ungelesene Notizen"
   String get unreadNotes => "Ungelesene Notizen";
+  /// "Du musst die Nutzer ID in den Einstellungen aktivieren um deine Nachrichten tracken zu können."
+  String get unreadNotesError => "Du musst die Nutzer ID in den Einstellungen aktivieren um deine Nachrichten tracken zu können.";
   /// "Hier werden Nachrichten angezeigt, welche du erstellt hast und die noch nicht gelesen wurden."
   String get unreadNotesInfo => "Hier werden Nachrichten angezeigt, welche du erstellt hast und die noch nicht gelesen wurden.";
   /// "Meine Notizen"
@@ -129,6 +137,9 @@ class _I18n_en_US extends I18n {
   /// "Onetime Notes"
   @override
   String get appTitle => "Onetime Notes";
+  /// "Cancel"
+  @override
+  String get cancel => "Cancel";
   /// "Copied ID!"
   @override
   String get copiedID => "Copied ID!";
@@ -216,12 +227,18 @@ class _I18n_en_US extends I18n {
   /// "Data protection"
   @override
   String get sData => "Data protection";
-  /// "Delete userdata"
+  /// "Reset userdata"
   @override
-  String get sDataDeleteUser => "Delete userdata";
+  String get sDataRefreshUser => "Reset userdata";
   /// "Create a user ID"
   @override
   String get sDataUserID => "Create a user ID";
+  /// "To change this Settings the app needs to restart. Okay?"
+  @override
+  String get sRestartAlertContent => "To change this Settings the app needs to restart. Okay?";
+  /// "App will restart"
+  @override
+  String get sRestartAlertTitle => "App will restart";
   /// "Select a theme"
   @override
   String get sThemeSelect => "Select a theme";
@@ -240,6 +257,9 @@ class _I18n_en_US extends I18n {
   /// "Unread notes"
   @override
   String get unreadNotes => "Unread notes";
+  /// "You have to activate the user ID in settings to track your messages."
+  @override
+  String get unreadNotesError => "You have to activate the user ID in settings to track your messages.";
   /// "Here you can see notes you created if they are not readed yet."
   @override
   String get unreadNotesInfo => "Here you can see notes you created if they are not readed yet.";

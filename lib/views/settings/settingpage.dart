@@ -3,6 +3,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:onetime_notes/appBuilder.dart';
 import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/services/settings.dart';
+import 'package:onetime_notes/services/userRepository.dart';
 import 'package:undraw/undraw.dart';
 
 class Settingpage extends StatefulWidget {
@@ -13,10 +14,25 @@ class Settingpage extends StatefulWidget {
 }
 
 class _SettingpageState extends State<Settingpage> {
+  var _scaffold = GlobalKey<ScaffoldState>();
+  Settings _settings = Settings();
+  UserRepository _repo = UserRepository();
+  String uid = "";
+
+  @override
+  void initState() { 
+    super.initState();
+    _repo.userID().then((val) {
+      setState(() {
+        uid = val;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffold,
       appBar: AppBar(
         title: Text(I18n.of(context).settings),
       ),
@@ -83,15 +99,17 @@ class _SettingpageState extends State<Settingpage> {
                           title: Text(I18n.of(context).sDataUserID),
                           leading: Icon(MdiIcons.accountBadge),
                           trailing: Switch(
-                            value: true,
-                            onChanged: (_) {},
+                            value: _settings.createUser,
+                            onChanged: changeUserPrivacy,
                             activeColor: Colors.green,
                           ),
                         ),
                         ListTile(
-                          leading: Icon(MdiIcons.accountRemove),
-                          title: Text(I18n.of(context).sDataDeleteUser),
+                          leading: Icon(MdiIcons.accountConvert),
+                          title: Text(I18n.of(context).sDataRefreshUser),
+                          subtitle: uid != null ? Text(uid) : null,
                           trailing: Icon(Icons.chevron_right),
+                          onTap: reset,
                         ),
                         ListTile(
                           leading: Icon(MdiIcons.informationVariant),
@@ -108,5 +126,44 @@ class _SettingpageState extends State<Settingpage> {
         ),
       ),
     );
+  }
+
+  void changeUserPrivacy(bool value) async {
+    var b = await showAlert();
+    if (b) {
+      _settings.createUser = value;
+      AppBuilder.of(_scaffold.currentContext).restart();
+    }
+  }
+
+  Future<void> reset() async {
+    var b = await showAlert();
+    if (b) {
+      _repo.reset();
+      AppBuilder.of(context).restart();
+    }
+  }
+
+  Future<bool> showAlert() async {
+    bool b = await showDialog<bool>(
+      context: _scaffold.currentContext,
+      builder: (context) => AlertDialog(
+        title: Text(I18n.of(context).sRestartAlertTitle),
+        content: Text(I18n.of(context).sRestartAlertContent),
+        actions: <Widget>[
+          FlatButton(
+            child: Text(I18n.of(context).cancel),
+            textColor: Theme.of(context).errorColor,
+            onPressed: () => Navigator.pop(context, false),
+          ),
+          FlatButton(
+            child: Text("Okay"),
+            textColor: Theme.of(context).accentColor,
+            onPressed: () => Navigator.pop(context, true),
+          )
+        ],
+      )
+    );
+    return b;
   }
 }

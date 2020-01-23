@@ -4,6 +4,7 @@ import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/models/note.dart';
 import 'package:onetime_notes/services/database.dart';
 import 'package:onetime_notes/services/date_helper.dart';
+import 'package:onetime_notes/services/settings.dart';
 
 class Notelistpage extends StatefulWidget {
   Notelistpage({Key key}) : super(key: key);
@@ -15,6 +16,7 @@ class Notelistpage extends StatefulWidget {
 class _NotelistpageState extends State<Notelistpage> {
   var _scaffold = GlobalKey<ScaffoldState>();
   var _db = Database();
+  var _settings = Settings();
 
   @override
   void initState() {
@@ -32,7 +34,7 @@ class _NotelistpageState extends State<Notelistpage> {
       appBar: AppBar(
         title: Text(I18n.of(context).unreadNotesTitle),
       ),
-      body: StreamBuilder(
+      body: _settings.createUser ? StreamBuilder(
         stream: _db.myNotes,
         builder: (context, snap) {
           if (snap.hasData) {
@@ -75,7 +77,17 @@ class _NotelistpageState extends State<Notelistpage> {
           } else
             return Center(child: CircularProgressIndicator());
         },
-      ),
+      )
+      : Padding(
+        padding: EdgeInsets.all(8),
+        child: Card(
+          color: Theme.of(context).errorColor,
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Text(I18n.of(context).unreadNotesError),
+          ),
+        ),
+      )
     );
   }
 

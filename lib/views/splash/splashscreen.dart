@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onetime_notes/services/settings.dart';
 import 'package:onetime_notes/services/userRepository.dart';
 import 'package:onetime_notes/views/read/enteridpage.dart';
 
@@ -59,7 +60,7 @@ class _SplashscreenState extends State<Splashscreen> {
   }
 
   Future<void> _init() async {
-    UserRepository().signInAnonymous();
+    UserRepository().init(Settings().createUser);
     return Future;
   }
 }
