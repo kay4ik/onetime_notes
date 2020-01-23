@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/models/note.dart';
 import 'package:onetime_notes/services/crypter.dart';
 import 'package:onetime_notes/services/database.dart';
@@ -36,7 +37,7 @@ class _CreationpageState extends State<Creationpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Neue Notiz"),
+        title: Text(I18n.of(context).createNoteTitle),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.send),
@@ -57,8 +58,8 @@ class _CreationpageState extends State<Creationpage> {
                   maxLength: 30,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: "Betreff eingeben",
-                    hintText: "Der Betreff ist lesbar!",
+                    labelText: I18n.of(context).enterSubject,
+                    hintText: I18n.of(context).createNoteSubHint,
                   ),
                 ),
                 SizedBox(height: 12),
@@ -68,13 +69,13 @@ class _CreationpageState extends State<Creationpage> {
                   minLines: 7,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: "Nachricht schreiben",
-                    hintText: "Hallo, dies sind die vetraulichen Daten...",
+                    labelText: I18n.of(context).witeMessage,
+                    hintText: I18n.of(context).createNoteMsgHint,
                   ),
                 ),
                 SizedBox(height: 12),
                 ExpansionTile(
-                  title: Text("Optionen"),
+                  title: Text(I18n.of(context).options),
                   leading: Icon(Icons.settings),
                   children: <Widget>[
                     Padding(
@@ -83,7 +84,7 @@ class _CreationpageState extends State<Creationpage> {
                         controller: _passwordF,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: "Passwort festlegen"),
+                            labelText: I18n.of(context).password),
                       ),
                     )
                   ],
@@ -98,7 +99,7 @@ class _CreationpageState extends State<Creationpage> {
       send();
     else {
       var snackbar = SnackBar(
-        content: Text("Fülle den Betreff und die Nachhricht aus."),
+        content: Text(I18n.of(context).createNoteFillOut),
         backgroundColor: Theme.of(context).errorColor,
       );
       Scaffold.of(_scaffoldKey.currentContext).showSnackBar(snackbar);

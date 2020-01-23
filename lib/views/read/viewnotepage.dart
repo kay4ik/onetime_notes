@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/models/note.dart';
 import 'package:onetime_notes/services/crypter.dart';
 import 'package:onetime_notes/services/date_helper.dart';
@@ -49,13 +50,13 @@ class _ViewNotepageState extends State<ViewNotepage> {
                             children: <Widget>[
                               ListTile(
                                 leading: Icon(MdiIcons.shieldLockOutline),
-                                title: Text("Mit Passwort verschlüsselt!"),
+                                title: Text(I18n.of(context).cryptedMsg),
                               ),
                               TextField(
                                 controller: _controller,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    labelText: "Passwort eingeben",
+                                    labelText: I18n.of(context).password,
                                     hintText: "TheZoey123"),
                               ),
                               SizedBox(height: 8),
@@ -65,12 +66,12 @@ class _ViewNotepageState extends State<ViewNotepage> {
                                 children: <Widget>[
                                   OutlineButton.icon(
                                     icon: Icon(MdiIcons.sortVariantLock),
-                                    label: Text("Verschlüsselt zeigen"),
+                                    label: Text(I18n.of(context).cryptedShow),
                                     onPressed: readCrypted,
                                   ),
                                   RaisedButton.icon(
                                     icon: Icon(Icons.lock_open),
-                                    label: Text("Entschlüsseln"),
+                                    label: Text(I18n.of(context).cryptedDecode),
                                     onPressed: decrypt,
                                   ),
                                 ],
@@ -92,7 +93,7 @@ class _ViewNotepageState extends State<ViewNotepage> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Nachricht",
+                            I18n.of(context).message,
                             style: Theme.of(context).textTheme.title,
                           ),
                         ),
@@ -109,7 +110,7 @@ class _ViewNotepageState extends State<ViewNotepage> {
                   child: ListTile(
                     leading: Icon(Icons.date_range),
                     title: Text(DateHelper.writeDate(widget.note.create)),
-                    subtitle: Text("Nachricht erstellt am"),
+                    subtitle: Text(I18n.of(context).messageCreatedAt),
                   ),
                 )
               ],
@@ -145,7 +146,7 @@ class _ViewNotepageState extends State<ViewNotepage> {
 
   void showErrorPassword() {
     var snackbar = SnackBar(
-      content: Text("Entschlüsselung fehlgeschlagen! Passwort falsch?"),
+      content: Text(I18n.of(context).cryptedError),
       backgroundColor: Theme.of(context).errorColor,
     );
     _scaffold.currentState.showSnackBar(snackbar);

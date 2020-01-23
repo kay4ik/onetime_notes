@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:onetime_notes/appBuilder.dart';
+import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/services/settings.dart';
 import 'package:onetime_notes/views/create/creationpage.dart';
 import 'package:onetime_notes/views/home/homepage.dart';
@@ -73,6 +75,15 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           "/read": (_) => EnterIDpage(),
           "/list": (_) => Notelistpage(),
         },
+        supportedLocales: [
+          Locale('de', ''),
+          Locale('en', ''),
+        ],
+        localizationsDelegates: [
+          I18n.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+        ],
       ),
     );
   }

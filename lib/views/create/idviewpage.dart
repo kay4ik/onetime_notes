@@ -1,6 +1,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/link.dart';
 import 'package:share/share.dart';
 
@@ -21,7 +22,7 @@ class _IDViewpageState extends State<IDViewpage> {
     return Scaffold(
       key: _scaffold,
       appBar: AppBar(
-        title: Text("Notiz erstellt"),
+        title: Text(I18n.of(context).createdNote),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -56,12 +57,12 @@ class _IDViewpageState extends State<IDViewpage> {
                       children: <Widget>[
                         OutlineButton.icon(
                           icon: Icon(Icons.content_copy),
-                          label: Text("ID kopieren"),
+                          label: Text(I18n.of(context).copyID),
                           onPressed: copy,
                         ),
                         RaisedButton.icon(
                           icon: Icon(Icons.share),
-                          label: Text("Link teilen"),
+                          label: Text(I18n.of(context).shareLink),
                           onPressed: share,
                         ),
                       ],
@@ -71,9 +72,7 @@ class _IDViewpageState extends State<IDViewpage> {
               ),
             ),
             SizedBox(height: 8),
-            Text(
-              "Sende die ID oder den Link an den Empfänger! Die Nachricht wird gelöscht sobald die Nachricht vom Empfänger geöffnet wird.",
-            )
+            Text(I18n.of(context).createNoteFinInfo)
           ],
         ),
       ),
@@ -83,7 +82,7 @@ class _IDViewpageState extends State<IDViewpage> {
   void copy() {
     Clipboard.setData(ClipboardData(text: widget.id));
     var snackbar = SnackBar(
-      content: Text("Kopiert!"),
+      content: Text(I18n.of(context).copiedID),
       duration: Duration(seconds: 1),
       backgroundColor: Theme.of(context).accentColor,
     );
@@ -103,10 +102,8 @@ class _IDViewpageState extends State<IDViewpage> {
     );
     var link = await params.buildShortLink();
     await Share.share(
-      link.shortUrl.toString() +
-          " \nSolltest du Probleme beim öffnen des Links haben, lade dir die onetimenotes App und öffne diese ID: " +
-          widget.id,
-      subject: "Neue Ontime Notiz erstellt!",
+      link.shortUrl.toString() + I18n.of(context).link_content + widget.id,
+      subject: I18n.of(context).link_subject,
     );
   }
 }

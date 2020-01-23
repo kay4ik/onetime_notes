@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/models/note.dart';
 import 'package:onetime_notes/services/database.dart';
 import 'package:onetime_notes/services/date_helper.dart';
@@ -29,7 +30,7 @@ class _NotelistpageState extends State<Notelistpage> {
     return Scaffold(
       key: _scaffold,
       appBar: AppBar(
-        title: Text("Meine Notizen"),
+        title: Text(I18n.of(context).unreadNotesTitle),
       ),
       body: StreamBuilder(
         stream: _db.myNotes,
@@ -43,7 +44,7 @@ class _NotelistpageState extends State<Notelistpage> {
                   return Card(
                     child: Padding(
                       padding: EdgeInsets.all(8),
-                      child: Text(info),
+                      child: Text(I18n.of(context).unreadNotesInfo),
                     ),
                   );
                 } else {
@@ -83,16 +84,16 @@ class _NotelistpageState extends State<Notelistpage> {
     Clipboard.setData(data);
     _scaffold.currentState.showSnackBar(
       SnackBar(
-        content: Text("ID kopiert!"),
+        content: Text(I18n.of(context).copiedID),
         backgroundColor: Theme.of(context).accentColor,
         action: SnackBarAction(
-          label: "Anzeigen",
+          label: I18n.of(context).show,
           onPressed: () {
             showDialog(
               context: _scaffold.currentContext,
               builder: (context) {
                 return AlertDialog(
-                  title: Text("ID von "+note.subject),
+                  title: Text(note.subject),
                   content: SelectableText(note.id),
                 );
               }
@@ -103,5 +104,3 @@ class _NotelistpageState extends State<Notelistpage> {
     );
   }
 }
-
-var info = "Hier werden Nachrichten angezeigt, welche du erstellt hast und die noch nicht gelesen wurden.";

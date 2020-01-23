@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/services/database.dart';
 import 'package:onetime_notes/views/read/viewnotepage.dart';
 
@@ -30,11 +31,10 @@ class _EnterIDpageState extends State<EnterIDpage> {
 
   @override
   Widget build(BuildContext context) {
-    _checkNotification();
     return Scaffold(
       key: _scaffold,
       appBar: AppBar(
-        title: Text("Notiz öffnen"),
+        title: Text(I18n.of(context).openNote),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.content_paste),
@@ -50,7 +50,7 @@ class _EnterIDpageState extends State<EnterIDpage> {
               controller: _controller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: "Notiz ID",
+                labelText: I18n.of(context).noteID,
                 hintText: "ABcDef1gH2Ijq3rsTuvW",
                 errorText: error,
               ),
@@ -60,8 +60,7 @@ class _EnterIDpageState extends State<EnterIDpage> {
               margin: EdgeInsets.all(0),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                    "Wenn Sie fortfahren, wird die Nachricht aus der Datenbank gelöscht und kann nicht Wiederhergestellt werden."),
+                child: Text(I18n.of(context).openNoteInfotext),
               ),
             ),
             SizedBox(height: 12),
@@ -70,8 +69,9 @@ class _EnterIDpageState extends State<EnterIDpage> {
                   ? CircularProgressIndicator()
                   : FloatingActionButton.extended(
                       icon: Icon(Icons.open_in_new),
-                      label: Text("Öffnen und löschen"),
-                      onPressed: openAndDelete,
+                      label: Text(I18n.of(context).openNoteButtontext),
+                      backgroundColor: _controller.text.isEmpty ? Colors.grey : null,
+                      onPressed: _controller.text.isEmpty ? null : readDatabase,
                     );
             })
           ],
@@ -82,24 +82,13 @@ class _EnterIDpageState extends State<EnterIDpage> {
 
   String get error {
     return _controller.text.isEmpty
-    ? "Bitte ID einfügen"
+    ? I18n.of(context).enterIDPlease
     : null;
   }
 
   void _paste() async {
     var text = await Clipboard.getData("text/plain");
     _controller.text = text.text;
-  }
-
-  void openAndDelete() async {
-    if (_controller.text.isNotEmpty) readDatabase();
-    else {
-      var snackbar = SnackBar(
-        content: Text("Füge die ID ein, um eine Notiz zu öffnen."),
-        backgroundColor: Theme.of(context).accentColor,
-      );
-      _scaffold.currentState.showSnackBar(snackbar);
-    }
   }
 
   void readDatabase() async {
@@ -116,7 +105,7 @@ class _EnterIDpageState extends State<EnterIDpage> {
     }
     else {
       var snackbar = SnackBar(
-        content: Text("Diese ID ist falsch, oder die Notiz wurde bereits gelöscht."),
+        content: Text(I18n.of(context).openNoteError),
         backgroundColor: Theme.of(context).errorColor,
       );
       _scaffold.currentState.showSnackBar(snackbar);
@@ -129,7 +118,7 @@ class _EnterIDpageState extends State<EnterIDpage> {
   void _checkNotification() {
     if (widget.id != null && !_notified) {
       var snackbar = SnackBar(
-        content: Text("ID erfolgreich eingefügt!"),
+        content: Text(I18n.of(context).openNotePasted),
         backgroundColor: Theme.of(context).accentColor,
       );
       Timer(const Duration(milliseconds: 500), () {
