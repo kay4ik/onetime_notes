@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:548770097903:android:362c869a78de8b9232c91a",
+        "mobilesdk_app_id": "1:548770097903:android:3715f08512335af132c91a",
         "android_client_info": {
-          "package_name": "de.zoey.onetime_notes"
+          "package_name": "de.thezoey.onetime_notes"
         }
       },
       "oauth_client": [
@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "548770097903-2c094a73krut5v63975cv82bpvjtcm87.apps.googleusercontent.com",
+              "client_id": "548770097903-gmfh14lhuge4e016qp5mrd67jg4hkh5t.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "de.zoey.onetimeNotes"
+                "bundle_id": "de.thezoey.onetimeNotes"
               }
             }
           ]

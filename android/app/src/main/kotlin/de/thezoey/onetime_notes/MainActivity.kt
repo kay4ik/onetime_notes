@@ -1,4 +1,4 @@
-package de.zoey.onetime_notes
+package de.thezoey.onetime_notes
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

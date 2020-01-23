@@ -3,13 +3,13 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 Uri initialLink;
 
 final androidParams = AndroidParameters(
-  packageName: "de.zoey.onetime_notes",
+  packageName: "de.thezoey.onetime_notes",
   minimumVersion: 25,
   fallbackUrl: Uri.parse("https://google.com")
 );
 
 final iosParams = IosParameters(
-  bundleId: "de.zoey.onetimeNotes",
+  bundleId: "de.thezoey.onetimeNotes",
 );
 
 final socialMetaParams = SocialMetaTagParameters(
@@ -24,11 +24,11 @@ final parameters = DynamicLinkParameters(
   link: Uri.parse("https://otn.thezoey.de/"),
   uriPrefix: "https://otn.thezoey.de",
   androidParameters: AndroidParameters(
-    packageName: "de.zoey.onetime_notes",
+    packageName: "de.thezoey.onetime_notes",
     minimumVersion: 25,
   ),
   iosParameters: IosParameters(
-    bundleId: "de.zoey.onetimeNotes",
+    bundleId: "de.thezoey.onetimeNotes",
   ),
 );
 

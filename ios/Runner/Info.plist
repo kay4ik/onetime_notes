@@ -27,7 +27,7 @@
 			<string>otnlink</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>de.zoey.onetimeNotes</string>
+				<string>de.thezoey.otn</string>
 			</array>
 		</dict>
 	</array>

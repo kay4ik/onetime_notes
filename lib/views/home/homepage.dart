@@ -14,7 +14,11 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Onetime Notes"),
+        title: Text(
+          "Onetime Notes",
+          style: TextStyle(letterSpacing: 4, ),
+        ),
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.settings),
           onPressed: () => Navigator.of(context).pushNamed("/start/settings"),
