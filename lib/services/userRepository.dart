@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class UserRepository {
   var _auth = FirebaseAuth.instance;
 
-  void signInAnonymous() async {
+  Future<void> signInAnonymous() async {
     await _auth.signInAnonymously();
   }
 
@@ -13,14 +13,14 @@ class UserRepository {
     else return null;
   }
 
-  void deactivate() async {
+  Future<void> deactivate() async {
     var user = await _auth.currentUser();
     user?.delete();
   }
 
-  void reset() async {
-    deactivate();
-    signInAnonymous();
+  Future<void> reset() async {
+    await deactivate();
+    await signInAnonymous();
   }
 
   void init(bool createUser) async {

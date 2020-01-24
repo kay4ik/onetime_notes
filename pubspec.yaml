@@ -26,6 +26,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.7.3"
 
 flutter:
   uses-material-design: true
@@ -42,3 +43,10 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path: "assets/fin.png"
+  adaptive_icon_background: "assets/back.png"
+  adaptive_icon_foreground: "assets/front.png"

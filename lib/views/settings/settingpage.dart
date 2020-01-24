@@ -139,7 +139,7 @@ class _SettingpageState extends State<Settingpage> {
   Future<void> reset() async {
     var b = await showAlert();
     if (b) {
-      _repo.reset();
+      await _repo.reset();
       AppBuilder.of(context).restart();
     }
   }
