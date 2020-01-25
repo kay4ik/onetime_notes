@@ -57,6 +57,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           brightness: Brightness.dark,
           accentColor: Colors.green[800],
           buttonColor: Colors.green[800],
+          platform: TargetPlatform.iOS,
         ),
         theme: ThemeData(
           brightness: Brightness.light,
@@ -65,6 +66,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             color: Colors.green[800],
           ),
           buttonColor: Colors.green,
+          platform: TargetPlatform.iOS,
         ),
         home: Splashscreen(link: initialLink),
         routes: {

@@ -91,6 +91,11 @@ class _NotelistpageState extends State<Notelistpage> {
     );
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   void copyID(Note note) {
     var data = ClipboardData(text: note.id);
     Clipboard.setData(data);

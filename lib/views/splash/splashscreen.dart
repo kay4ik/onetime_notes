@@ -24,7 +24,7 @@ class _SplashscreenState extends State<Splashscreen> {
           print("ID IS:" + id);
           var route = MaterialPageRoute(builder: (_) => EnterIDpage(id: id));
           Navigator.of(context).push(route);
-        } 
+        }
       });
     });
   }
@@ -37,6 +37,30 @@ class _SplashscreenState extends State<Splashscreen> {
         alignment: Alignment.center,
         child: Stack(
           children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      height: 100,
+                      width: 100,
+                      child: Image.asset("assets/icon.png"),
+                    ),
+                    Text(
+                      "Onetime Notes",
+                      style: TextStyle(
+                        color: Colors.green[600],
+                        fontSize: 25,
+                        fontFamily: "Montserrat",
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
             Center(
               child: Image.asset(
                 "assets/logo.png",
@@ -49,7 +73,7 @@ class _SplashscreenState extends State<Splashscreen> {
                 height: 180,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.green[900]),
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.green[600]),
                 ),
               ),
             ),
