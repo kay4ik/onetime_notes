@@ -7,7 +7,6 @@ import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/services/linker.dart';
 import 'package:onetime_notes/services/settings.dart';
 import 'package:onetime_notes/views/create/creationpage.dart';
-import 'package:onetime_notes/views/error/internetErrorpage.dart';
 import 'package:onetime_notes/views/home/homepage.dart';
 import 'package:onetime_notes/views/info/infopage.dart';
 import 'package:onetime_notes/views/list/listview.dart';
@@ -75,7 +74,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           "/create": (_) => Creationpage(),
           "/read": (_) => EnterIDpage(),
           "/list": (_) => Notelistpage(),
-          "/error/internet": (_) => InternetErrorpage(),
         },
         supportedLocales: [
           Locale('de', ''),
