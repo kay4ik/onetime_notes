@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,6 +19,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Settings().init();
   await Linker.instance.retrieveDynamicLink();
+  Crashlytics.instance.enableInDevMode = false;
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
   runApp(MyApp());
 }
 
