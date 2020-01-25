@@ -31,14 +31,7 @@ class _InfopageState extends State<Infopage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-            icon: Icon(MdiIcons.chevronDown),
-            onPressed: () => Navigator.pop(context),
-          ),
           title: Text("Information"),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
         ),
         body: Column(
           mainAxisSize: MainAxisSize.min,

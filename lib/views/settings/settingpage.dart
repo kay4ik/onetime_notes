@@ -139,10 +139,8 @@ class _SettingpageState extends State<Settingpage> {
   }
 
   void moreInfo() {
-    showModalBottomSheet(
-      context: _scaffold.currentContext,
-      builder: (_) => Infopage(page: 2),
-    );
+    var route = MaterialPageRoute(builder: (_) => Infopage(page: 2));
+    Navigator.push(context, route);
   }
 
   Future<void> reset() async {
