@@ -4,6 +4,7 @@ import 'package:onetime_notes/appBuilder.dart';
 import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/services/settings.dart';
 import 'package:onetime_notes/services/userRepository.dart';
+import 'package:onetime_notes/views/info/infopage.dart';
 import 'package:undraw/undraw.dart';
 
 class Settingpage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _SettingpageState extends State<Settingpage> {
   String uid = "";
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     _repo.userID().then((val) {
       setState(() {
@@ -87,7 +88,7 @@ class _SettingpageState extends State<Settingpage> {
                       children: <Widget>[
                         ListTile(
                           leading: Icon(
-                            MdiIcons.accountLock,
+                            MdiIcons.shieldLockOutline,
                             color: Colors.green,
                           ),
                           title: Text(
@@ -96,8 +97,8 @@ class _SettingpageState extends State<Settingpage> {
                           ),
                         ),
                         ListTile(
-                          title: Text(I18n.of(context).sDataUserID),
                           leading: Icon(MdiIcons.accountBadge),
+                          title: Text(I18n.of(context).sDataUserID),
                           trailing: Switch(
                             value: _settings.createUser,
                             onChanged: changeUserPrivacy,
@@ -115,6 +116,7 @@ class _SettingpageState extends State<Settingpage> {
                           leading: Icon(MdiIcons.informationVariant),
                           title: Text(I18n.of(context).moreInfo),
                           trailing: Icon(Icons.chevron_right),
+                          onTap: moreInfo,
                         ),
                       ],
                     ),
@@ -136,6 +138,13 @@ class _SettingpageState extends State<Settingpage> {
     }
   }
 
+  void moreInfo() {
+    showModalBottomSheet(
+      context: _scaffold.currentContext,
+      builder: (_) => Infopage(page: 2),
+    );
+  }
+
   Future<void> reset() async {
     var b = await showAlert();
     if (b) {
@@ -146,24 +155,23 @@ class _SettingpageState extends State<Settingpage> {
 
   Future<bool> showAlert() async {
     bool b = await showDialog<bool>(
-      context: _scaffold.currentContext,
-      builder: (context) => AlertDialog(
-        title: Text(I18n.of(context).sRestartAlertTitle),
-        content: Text(I18n.of(context).sRestartAlertContent),
-        actions: <Widget>[
-          FlatButton(
-            child: Text(I18n.of(context).cancel),
-            textColor: Theme.of(context).errorColor,
-            onPressed: () => Navigator.pop(context, false),
-          ),
-          FlatButton(
-            child: Text("Okay"),
-            textColor: Theme.of(context).accentColor,
-            onPressed: () => Navigator.pop(context, true),
-          )
-        ],
-      )
-    );
+        context: _scaffold.currentContext,
+        builder: (context) => AlertDialog(
+              title: Text(I18n.of(context).sRestartAlertTitle),
+              content: Text(I18n.of(context).sRestartAlertContent),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text(I18n.of(context).cancel),
+                  textColor: Theme.of(context).errorColor,
+                  onPressed: () => Navigator.pop(context, false),
+                ),
+                FlatButton(
+                  child: Text("Okay"),
+                  textColor: Theme.of(context).accentColor,
+                  onPressed: () => Navigator.pop(context, true),
+                )
+              ],
+            ));
     return b;
   }
 }

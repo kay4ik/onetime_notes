@@ -1,27 +1,54 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/views/info/components/infocard.dart';
 import 'package:undraw/undraw.dart';
 import 'package:page_view_indicators/page_view_indicators.dart';
 
-class InfoPage extends StatelessWidget {
-  InfoPage({Key key}) : super(key: key);
+class Infopage extends StatefulWidget {
+  final int page;
+  Infopage({Key key, this.page = 0}) : super(key: key);
 
+  @override
+  _InfopageState createState() => _InfopageState();
+}
+
+class _InfopageState extends State<Infopage> {
   final _controller = PageController();
   final _notifierer = ValueNotifier<int>(0);
+
+  @override
+  void initState() { 
+    super.initState();
+    Timer(Duration(milliseconds: 200), () {
+      _controller.animateToPage(widget.page, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            icon: Icon(MdiIcons.chevronDown),
+            onPressed: () => Navigator.pop(context),
+          ),
           title: Text("Information"),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
         body: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
               margin: EdgeInsets.only(top: 8),
               child: CirclePageIndicator(
                 currentPageNotifier: _notifierer,
                 itemCount: 3,
+                selectedDotColor: Theme.of(context).accentColor,
               ),
             ),
             Expanded(
@@ -35,18 +62,18 @@ class InfoPage extends StatelessWidget {
                   children: <Widget>[
                     Infocard(
                       illustration: UnDrawIllustration.share,
-                      title: "Selbstzerstörende Nachrichten",
-                      info: info1,
+                      title: I18n.of(context).INFO_oneTitle,
+                      info: I18n.of(context).INFO_one,
                     ),
                     Infocard(
                       illustration: UnDrawIllustration.safe,
-                      title: "Keine Wiederherstellung",
-                      info: info2,
+                      title: I18n.of(context).INFO_twoTitle,
+                      info: I18n.of(context).INFO_two,
                     ),
                     Infocard(
                       illustration: UnDrawIllustration.personalization,
-                      title: "Keine Datensammlung",
-                      info: info3,
+                      title: I18n.of(context).INFO_threeTitle,
+                      info: I18n.of(context).INFO_three,
                     ),
                   ],
                 ),
@@ -55,19 +82,4 @@ class InfoPage extends StatelessWidget {
           ],
         ));
   }
-
-  final info1 = """
-Du hast die Möglichkeit Nachrichten zu erstellen, die entgültig gelöscht werden sobald sie gelesen werden. 
-Nachdem du die Nachricht erstellt hast erhälst du den Code der Nachricht. Teile diesen Code mit dem Empfänger, damit er die Nachricht öffnen kann.
-""";
-
-  final info2 = """
-Wurde eine Nachricht einmal geöffnet, ist sie für immer gelöscht! Es gibt keine Möglichkeit mehr (für niemanden) diese Daten wiederherzustellen.
-Als ersteller einer Nachricht kannst du sie auch löschen bevor sie gelesen wurden.
-""";
-
-  final info3 = """
-Wir sammeln keine Daten von dir oder deinem Smartphone! Wir erstellen eine Anonyme ID um zu identifizieren, welche Nachrichten von dir erstellt wurden.
-Diese ID ist für niemenden ersichtlich! Falls du dies trotzdem nicht möchtest kannst du diese ID in den Einstellungen deaktivieren.
-""";
 }

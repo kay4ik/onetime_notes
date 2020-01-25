@@ -23,10 +23,11 @@ class UserRepository {
     await signInAnonymous();
   }
 
-  void init(bool createUser) async {
+  Future<void> init(bool createUser) async {
     if (createUser) signInAnonymous();
     else {
       if (await _auth.currentUser() != null) deactivate();
     }
+    return Future;
   }
 }

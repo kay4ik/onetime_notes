@@ -7,6 +7,7 @@ import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/services/linker.dart';
 import 'package:onetime_notes/services/settings.dart';
 import 'package:onetime_notes/views/create/creationpage.dart';
+import 'package:onetime_notes/views/error/internetErrorpage.dart';
 import 'package:onetime_notes/views/home/homepage.dart';
 import 'package:onetime_notes/views/info/infopage.dart';
 import 'package:onetime_notes/views/list/listview.dart';
@@ -27,7 +28,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
-  Timer _timerLink;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      _timerLink = Timer(const Duration(milliseconds: 1000), () {
+      Future.delayed(Duration(milliseconds: 1000), () {
         Linker.instance.retrieveDynamicLink();
       });
     }
@@ -71,10 +71,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         routes: {
           "/start": (_) => Homepage(),
           "/start/settings": (_) => Settingpage(),
-          "/start/info": (_) => InfoPage(),
+          "/start/info": (_) => Infopage(),
           "/create": (_) => Creationpage(),
           "/read": (_) => EnterIDpage(),
           "/list": (_) => Notelistpage(),
+          "/error/internet": (_) => InternetErrorpage(),
         },
         supportedLocales: [
           Locale('de', ''),
@@ -87,15 +88,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    if (_timerLink != null) {
-      _timerLink.cancel();
-    }
-    super.dispose();
   }
 
   Future<dynamic> _onLink(PendingDynamicLinkData data) async {

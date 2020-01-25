@@ -32,10 +32,16 @@ class I18n implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
+  /// "Du hast die Möglichkeit Nachrichten zu erstellen, die entgültig gelöscht werden sobald sie gelesen werden.\nNachdem du die Nachricht erstellt hast erhälst du den Code der Nachricht. Teile diesen Code mit dem Empfänger, damit er die Nachricht öffnen und lesen kann. Oder teile die Nachricht mit einem Link."
+  String get INFO_one => "Du hast die Möglichkeit Nachrichten zu erstellen, die entgültig gelöscht werden sobald sie gelesen werden.\nNachdem du die Nachricht erstellt hast erhälst du den Code der Nachricht. Teile diesen Code mit dem Empfänger, damit er die Nachricht öffnen und lesen kann. Oder teile die Nachricht mit einem Link.";
   /// "Selbstzerstörende Nachrichten"
   String get INFO_oneTitle => "Selbstzerstörende Nachrichten";
+  /// "Wir sammeln keine Daten von dir oder deinem Smartphone! Wir erstellen eine Anonyme ID um zu identifizieren, welche Nachrichten von dir erstellt wurden. Diese ID ist für niemenden ersichtlich und kann nicht mit dir in verbindung gebracht werden! Falls du dies trotzdem nicht möchtest kannst du dieses Feature in den Einstellungen deaktivieren."
+  String get INFO_three => "Wir sammeln keine Daten von dir oder deinem Smartphone! Wir erstellen eine Anonyme ID um zu identifizieren, welche Nachrichten von dir erstellt wurden. Diese ID ist für niemenden ersichtlich und kann nicht mit dir in verbindung gebracht werden! Falls du dies trotzdem nicht möchtest kannst du dieses Feature in den Einstellungen deaktivieren.";
   /// "Volle Privatsphäre"
   String get INFO_threeTitle => "Volle Privatsphäre";
+  /// "Wurde eine Nachricht einmal geöffnet, ist sie für immer gelöscht! Es gibt keine Möglichkeit mehr (für niemanden) diese Daten wiederherzustellen.\nAls ersteller einer Nachricht kannst du sie auch löschen bevor sie gelesen wurden."
+  String get INFO_two => "Wurde eine Nachricht einmal geöffnet, ist sie für immer gelöscht! Es gibt keine Möglichkeit mehr (für niemanden) diese Daten wiederherzustellen.\nAls ersteller einer Nachricht kannst du sie auch löschen bevor sie gelesen wurden.";
   /// "Keine Wiederherstellung"
   String get INFO_twoTitle => "Keine Wiederherstellung";
   /// "Onetime Notes"
@@ -88,6 +94,10 @@ class I18n implements WidgetsLocalizations {
   String get messageCreatedAt => "Nachricht erstellt am";
   /// "Mehr Informationen dazu"
   String get moreInfo => "Mehr Informationen dazu";
+  /// "Keine Internetverbindung"
+  String get noInternetConnection => "Keine Internetverbindung";
+  /// "Du musst mit dem Internet verbunden sein, um Onetime Notes zu nutzen."
+  String get noInternetConnectionInfo => "Du musst mit dem Internet verbunden sein, um Onetime Notes zu nutzen.";
   /// "Notiz ID"
   String get noteID => "Notiz ID";
   /// "Eine Notiz öffnen"
@@ -104,6 +114,8 @@ class I18n implements WidgetsLocalizations {
   String get options => "Optionen";
   /// "Passwort"
   String get password => "Passwort";
+  /// "Neu laden"
+  String get reload => "Neu laden";
   /// "Datenschutz"
   String get sData => "Datenschutz";
   /// "Nutzerdaten erneuern"
@@ -146,12 +158,21 @@ class _I18n_de_DE extends I18n {
 class _I18n_en_US extends I18n {
   const _I18n_en_US();
 
+  /// "You have the option to create messages that will be permanently deleted as soon as they are read. After you have created the message, you will receive the code of the message. Share this code with the recipient so that they can open and read the message. Or share the message with a link."
+  @override
+  String get INFO_one => "You have the option to create messages that will be permanently deleted as soon as they are read. After you have created the message, you will receive the code of the message. Share this code with the recipient so that they can open and read the message. Or share the message with a link.";
   /// "Self-destructive messages"
   @override
   String get INFO_oneTitle => "Self-destructive messages";
+  /// "We do not collect data from you or your smartphone! We create an anonymous ID to identify which messages you have created. This ID is not visible to anyone and cannot be associated with you! If you still don't want this, you can deactivate this feature in the settings."
+  @override
+  String get INFO_three => "We do not collect data from you or your smartphone! We create an anonymous ID to identify which messages you have created. This ID is not visible to anyone and cannot be associated with you! If you still don't want this, you can deactivate this feature in the settings.";
   /// "Full privacy"
   @override
   String get INFO_threeTitle => "Full privacy";
+  /// "Once a message has been opened, it is deleted forever! There is no longer any way (for anyone) to restore this data.\nAs the creator of a message, you can also delete it before it has been read."
+  @override
+  String get INFO_two => "Once a message has been opened, it is deleted forever! There is no longer any way (for anyone) to restore this data.\nAs the creator of a message, you can also delete it before it has been read.";
   /// "No recovery"
   @override
   String get INFO_twoTitle => "No recovery";
@@ -230,6 +251,12 @@ class _I18n_en_US extends I18n {
   /// "More information about it"
   @override
   String get moreInfo => "More information about it";
+  /// "No internet connection"
+  @override
+  String get noInternetConnection => "No internet connection";
+  /// "You have to be connected to the Internet to use Onetime Notes."
+  @override
+  String get noInternetConnectionInfo => "You have to be connected to the Internet to use Onetime Notes.";
   /// "Note ID"
   @override
   String get noteID => "Note ID";
@@ -254,6 +281,9 @@ class _I18n_en_US extends I18n {
   /// "Password"
   @override
   String get password => "Password";
+  /// "Reload"
+  @override
+  String get reload => "Reload";
   /// "Data protection"
   @override
   String get sData => "Data protection";

@@ -84,7 +84,7 @@ class _SplashscreenState extends State<Splashscreen> {
   }
 
   Future<void> _init() async {
-    UserRepository().init(Settings().createUser);
+    await UserRepository().init(Settings().createUser);
     return Future;
   }
 }
