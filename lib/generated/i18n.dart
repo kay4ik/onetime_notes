@@ -32,6 +32,12 @@ class I18n implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
+  /// "Selbstzerstörende Nachrichten"
+  String get INFO_oneTitle => "Selbstzerstörende Nachrichten";
+  /// "Volle Privatsphäre"
+  String get INFO_threeTitle => "Volle Privatsphäre";
+  /// "Keine Wiederherstellung"
+  String get INFO_twoTitle => "Keine Wiederherstellung";
   /// "Onetime Notes"
   String get appTitle => "Onetime Notes";
   /// "Abbrechen"
@@ -40,34 +46,40 @@ class I18n implements WidgetsLocalizations {
   String get copiedID => "ID kopiert!";
   /// "ID kopieren"
   String get copyID => "ID kopieren";
-  /// "Eine Neue Notiz erstellen"
-  String get createNote => "Eine Neue Notiz erstellen";
-  /// "Fülle den Betreff und die Nachhricht aus."
-  String get createNoteFillOut => "Fülle den Betreff und die Nachhricht aus.";
+  /// "Eine neue Notiz erstellen"
+  String get createNote => "Eine neue Notiz erstellen";
+  /// "Fülle den Betreff und die Nachricht aus."
+  String get createNoteFillOut => "Fülle den Betreff und die Nachricht aus.";
   /// "Sende die ID oder den Link an den Empfänger! Die Nachricht wird gelöscht, sobald Sie vom Empfänger geöffnet wird."
   String get createNoteFinInfo => "Sende die ID oder den Link an den Empfänger! Die Nachricht wird gelöscht, sobald Sie vom Empfänger geöffnet wird.";
-  /// "Hallo, dies sind die vetraulichen Daten..."
-  String get createNoteMsgHint => "Hallo, dies sind die vetraulichen Daten...";
+  /// "Hallo, dies sind die vertraulichen Daten …"
+  String get createNoteMsgHint => "Hallo, dies sind die vertraulichen Daten …";
   /// "Der Betreff ist lesbar!"
   String get createNoteSubHint => "Der Betreff ist lesbar!";
   /// "Neue Notiz"
   String get createNoteTitle => "Neue Notiz";
   /// "Notiz erstellt"
   String get createdNote => "Notiz erstellt";
+  /// "Verschlüsselt"
+  String get crypted => "Verschlüsselt";
   /// "Entschlüsseln"
   String get cryptedDecode => "Entschlüsseln";
   /// "Entschlüsselung fehlgeschlagen! Passwort falsch?"
   String get cryptedError => "Entschlüsselung fehlgeschlagen! Passwort falsch?";
   /// "Mit Passwort verschlüsselt!"
   String get cryptedMsg => "Mit Passwort verschlüsselt!";
+  /// "Nicht verschlüsselt"
+  String get cryptedNot => "Nicht verschlüsselt";
   /// "Verschlüsselt zeigen"
   String get cryptedShow => "Verschlüsselt zeigen";
+  /// "Löschen"
+  String get delete => "Löschen";
   /// "Bitte ID einfügen"
   String get enterIDPlease => "Bitte ID einfügen";
   /// "Betreff eingeben"
   String get enterSubject => "Betreff eingeben";
-  /// "\nSolltest du Probleme beim öffnen des Links haben, lade dir die onetimenotes App und öffne diese ID: "
-  String get link_content => "\nSolltest du Probleme beim öffnen des Links haben, lade dir die onetimenotes App und öffne diese ID: ";
+  /// "\nSolltest du Probleme beim Öffnen des Links haben, lade dir die \"Onetime Notes\" App und öffne diese ID:"
+  String get link_content => "\nSolltest du Probleme beim Öffnen des Links haben, lade dir die \"Onetime Notes\" App und öffne diese ID:";
   /// "Neue Onetime Notiz erstellt!"
   String get link_subject => "Neue Onetime Notiz erstellt!";
   /// "Nachricht"
@@ -98,12 +110,12 @@ class I18n implements WidgetsLocalizations {
   String get sDataRefreshUser => "Nutzerdaten erneuern";
   /// "Nutzer ID erstellen"
   String get sDataUserID => "Nutzer ID erstellen";
-  /// "Um diese einstellungen vorzunehmen muss die App neu gestartet werden. Okay?"
-  String get sRestartAlertContent => "Um diese einstellungen vorzunehmen muss die App neu gestartet werden. Okay?";
+  /// "Um diese Einstellungen vorzunehmen, muss die App neu gestartet werden. Okay?"
+  String get sRestartAlertContent => "Um diese Einstellungen vorzunehmen, muss die App neu gestartet werden. Okay?";
   /// "App wird neu gestartet"
   String get sRestartAlertTitle => "App wird neu gestartet";
-  /// "Theme auswählen"
-  String get sThemeSelect => "Theme auswählen";
+  /// "Thema auswählen"
+  String get sThemeSelect => "Thema auswählen";
   /// "Darstellungsoptionen"
   String get sThemeoptions => "Darstellungsoptionen";
   /// "Einstellungen"
@@ -134,6 +146,15 @@ class _I18n_de_DE extends I18n {
 class _I18n_en_US extends I18n {
   const _I18n_en_US();
 
+  /// "Self-destructive messages"
+  @override
+  String get INFO_oneTitle => "Self-destructive messages";
+  /// "Full privacy"
+  @override
+  String get INFO_threeTitle => "Full privacy";
+  /// "No recovery"
+  @override
+  String get INFO_twoTitle => "No recovery";
   /// "Onetime Notes"
   @override
   String get appTitle => "Onetime Notes";
@@ -155,51 +176,60 @@ class _I18n_en_US extends I18n {
   /// "Share the link or the ID to the receiver. The message will be deleted instantly if the receiver opens it."
   @override
   String get createNoteFinInfo => "Share the link or the ID to the receiver. The message will be deleted instantly if the receiver opens it.";
-  /// "Hey! This are the secret data..."
+  /// "Hey! This is the secret information about ..."
   @override
-  String get createNoteMsgHint => "Hey! This are the secret data...";
-  /// "The subject is not hidden!"
+  String get createNoteMsgHint => "Hey! This is the secret information about ...";
+  /// "The subject is readable!"
   @override
-  String get createNoteSubHint => "The subject is not hidden!";
+  String get createNoteSubHint => "The subject is readable!";
   /// "New note"
   @override
   String get createNoteTitle => "New note";
   /// "Note created"
   @override
   String get createdNote => "Note created";
-  /// "Decode"
+  /// "Crypted"
   @override
-  String get cryptedDecode => "Decode";
-  /// "Ooops! Can't decode the message. Wrong password?"
+  String get crypted => "Crypted";
+  /// "Decrypt"
   @override
-  String get cryptedError => "Ooops! Can't decode the message. Wrong password?";
+  String get cryptedDecode => "Decrypt";
+  /// "Decryption failed! Wrong password?"
+  @override
+  String get cryptedError => "Decryption failed! Wrong password?";
   /// "Encoded by password!"
   @override
   String get cryptedMsg => "Encoded by password!";
+  /// "Not crypted"
+  @override
+  String get cryptedNot => "Not crypted";
   /// "Show encoded"
   @override
   String get cryptedShow => "Show encoded";
+  /// "Delete"
+  @override
+  String get delete => "Delete";
   /// "Please enter an ID"
   @override
   String get enterIDPlease => "Please enter an ID";
   /// "Enter a subject"
   @override
   String get enterSubject => "Enter a subject";
-  /// "\nIf you have problems with opening the note, download the Onetime Notes App and enter this id: "
+  /// "\nIf you have problems opening the link, download the \"Onetime Notes\" app and open this ID:"
   @override
-  String get link_content => "\nIf you have problems with opening the note, download the Onetime Notes App and enter this id: ";
+  String get link_content => "\nIf you have problems opening the link, download the \"Onetime Notes\" app and open this ID:";
   /// "New Onetime note created!"
   @override
   String get link_subject => "New Onetime note created!";
   /// "Message"
   @override
   String get message => "Message";
-  /// "Message created at"
+  /// "Message created on"
   @override
-  String get messageCreatedAt => "Message created at";
-  /// "Show more about this"
+  String get messageCreatedAt => "Message created on";
+  /// "More information about it"
   @override
-  String get moreInfo => "Show more about this";
+  String get moreInfo => "More information about it";
   /// "Note ID"
   @override
   String get noteID => "Note ID";
@@ -209,15 +239,15 @@ class _I18n_en_US extends I18n {
   /// "Open and delete"
   @override
   String get openNoteButtontext => "Open and delete";
-  /// "This ID is incorrect or the note is already removed."
+  /// "This ID is incorrect or the note has already been deleted."
   @override
-  String get openNoteError => "This ID is incorrect or the note is already removed.";
-  /// "If you continue the note will be removed from the database. It's not possible to restore it."
+  String get openNoteError => "This ID is incorrect or the note has already been deleted.";
+  /// "If you continue, the message will be deleted from the database and cannot be recovered."
   @override
-  String get openNoteInfotext => "If you continue the note will be removed from the database. It's not possible to restore it.";
-  /// "ID pasted successfully!"
+  String get openNoteInfotext => "If you continue, the message will be deleted from the database and cannot be recovered.";
+  /// "ID successfully inserted!"
   @override
-  String get openNotePasted => "ID pasted successfully!";
+  String get openNotePasted => "ID successfully inserted!";
   /// "Options"
   @override
   String get options => "Options";
@@ -227,24 +257,24 @@ class _I18n_en_US extends I18n {
   /// "Data protection"
   @override
   String get sData => "Data protection";
-  /// "Reset userdata"
+  /// "Renew user data"
   @override
-  String get sDataRefreshUser => "Reset userdata";
+  String get sDataRefreshUser => "Renew user data";
   /// "Create a user ID"
   @override
   String get sDataUserID => "Create a user ID";
-  /// "To change this Settings the app needs to restart. Okay?"
+  /// "To make these settings, the app must be restarted. Ok?"
   @override
-  String get sRestartAlertContent => "To change this Settings the app needs to restart. Okay?";
-  /// "App will restart"
+  String get sRestartAlertContent => "To make these settings, the app must be restarted. Ok?";
+  /// "App will be restarted"
   @override
-  String get sRestartAlertTitle => "App will restart";
+  String get sRestartAlertTitle => "App will be restarted";
   /// "Select a theme"
   @override
   String get sThemeSelect => "Select a theme";
-  /// "Theme options"
+  /// "Display options"
   @override
-  String get sThemeoptions => "Theme options";
+  String get sThemeoptions => "Display options";
   /// "Settings"
   @override
   String get settings => "Settings";
@@ -257,12 +287,12 @@ class _I18n_en_US extends I18n {
   /// "Unread notes"
   @override
   String get unreadNotes => "Unread notes";
-  /// "You have to activate the user ID in settings to track your messages."
+  /// "You have to activate the user ID in the settings to be able to track your messages."
   @override
-  String get unreadNotesError => "You have to activate the user ID in settings to track your messages.";
-  /// "Here you can see notes you created if they are not readed yet."
+  String get unreadNotesError => "You have to activate the user ID in the settings to be able to track your messages.";
+  /// "Here you can see notes you created if they are not read yet."
   @override
-  String get unreadNotesInfo => "Here you can see notes you created if they are not readed yet.";
+  String get unreadNotesInfo => "Here you can see notes you created if they are not read yet.";
   /// "My Notes"
   @override
   String get unreadNotesTitle => "My Notes";

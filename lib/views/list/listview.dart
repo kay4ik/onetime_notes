@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/models/note.dart';
 import 'package:onetime_notes/services/database.dart';
 import 'package:onetime_notes/services/date_helper.dart';
+import 'package:onetime_notes/services/linker.dart';
 import 'package:onetime_notes/services/settings.dart';
+import 'package:share/share.dart';
 
 class Notelistpage extends StatefulWidget {
   Notelistpage({Key key}) : super(key: key);
@@ -34,90 +37,118 @@ class _NotelistpageState extends State<Notelistpage> {
       appBar: AppBar(
         title: Text(I18n.of(context).unreadNotesTitle),
       ),
-      body: _settings.createUser ? StreamBuilder(
-        stream: _db.myNotes,
-        builder: (context, snap) {
-          if (snap.hasData) {
-            return ListView.builder(
-              padding: EdgeInsets.all(8),
-              itemCount: snap.data.length + 1,
-              itemBuilder: (context, i) {
-                if (i == 0) {
-                  return Card(
-                    child: Padding(
+      body: _settings.createUser
+          ? StreamBuilder(
+              stream: _db.myNotes,
+              builder: (context, snap) {
+                if (snap.hasData) {
+                  return ListView.builder(
                       padding: EdgeInsets.all(8),
-                      child: Text(I18n.of(context).unreadNotesInfo),
-                    ),
-                  );
-                } else {
-                  var note = snap.data[i - 1];
-                  return Card(
-                    child: ListTile(
-                      title: Text(note.subject),
-                      subtitle: Text(DateHelper.writeDate(note.create)),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(Icons.content_copy),
-                            onPressed: () => copyID(note),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.delete_forever),
-                            color: Colors.red,
-                            onPressed: () => _db.deleteNote(note.id),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-              },
-            );
-          } else
-            return Center(child: CircularProgressIndicator());
-        },
-      )
-      : Padding(
-        padding: EdgeInsets.all(8),
-        child: Card(
-          color: Theme.of(context).errorColor,
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Text(I18n.of(context).unreadNotesError),
-          ),
-        ),
-      )
+                      itemCount: snap.data.length + 1,
+                      itemBuilder: (context, i) {
+                        if (i == 0) {
+                          return Card(
+                            child: Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Text(I18n.of(context).unreadNotesInfo),
+                            ),
+                          );
+                        } else {
+                          var note = snap.data[i - 1] as Note;
+                          return Card(
+                            child: ListTile(
+                              title: Text(note.subject),
+                              subtitle: Text(DateHelper.writeDate(note.create)),
+                              trailing: IconButton(
+                                icon: Icon(MdiIcons.fileSettingsOutline),
+                                onPressed: () => show(note),
+                              ),
+                            ),
+                          );
+                        }
+                      });
+                } else
+                  return Center(child: CircularProgressIndicator());
+              })
+          : Padding(
+              padding: EdgeInsets.all(8),
+              child: Card(
+                color: Theme.of(context).errorColor,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Text(I18n.of(context).unreadNotesError),
+                ),
+              ),
+            ),
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
+  void show(Note note) {
+    showDialog(
+        context: _scaffold.currentContext,
+        builder: (_) {
+          return Center(
+            child: Card(
+              margin: EdgeInsets.all(26),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(MdiIcons.notebookOutline),
+                    title: Text(note.subject),
+                    subtitle: Text(note.crypted
+                        ? I18n.of(context).crypted
+                        : I18n.of(context).cryptedNot),
+                  ),
+                  Divider(),
+                  ListTile(
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        OutlineButton.icon(
+                          icon: Icon(Icons.content_copy),
+                          label: Text(I18n.of(context).copyID),
+                          onPressed: () => copyID(note),
+                        ),
+                        RaisedButton.icon(
+                          icon: Icon(MdiIcons.share),
+                          label: Text(I18n.of(context).shareLink),
+                          onPressed: () => share(note),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(),
+                  Center(
+                    child: FlatButton.icon(
+                      icon: Icon(MdiIcons.deleteForever),
+                      label: Text(I18n.of(context).delete),
+                      textColor: Colors.red,
+                      onPressed: () => _db.deleteNote(note.id),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   void copyID(Note note) {
+    Navigator.of(context).pop();
     var data = ClipboardData(text: note.id);
     Clipboard.setData(data);
-    _scaffold.currentState.showSnackBar(
-      SnackBar(
-        content: Text(I18n.of(context).copiedID),
-        backgroundColor: Theme.of(context).accentColor,
-        action: SnackBarAction(
-          label: I18n.of(context).show,
-          onPressed: () {
-            showDialog(
-              context: _scaffold.currentContext,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text(note.subject),
-                  content: SelectableText(note.id),
-                );
-              }
-            );
-          },
-        ),
-      )
+    _scaffold.currentState.showSnackBar(SnackBar(
+      content: Text(I18n.of(context).copiedID),
+      backgroundColor: Theme.of(context).accentColor,
+    ));
+  }
+
+  void share(Note note) async {
+    var link = await Linker.instance.buildDynamicLink(note);
+    await Share.share(
+      link.toString() + I18n.of(context).link_content + note.id,
+      subject: I18n.of(context).link_subject,
     );
   }
 }

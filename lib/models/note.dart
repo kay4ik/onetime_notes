@@ -1,5 +1,7 @@
 import 'dart:core';
 
+import 'package:flutter/services.dart';
+
 class Note {
   String id;
   String subject;
@@ -31,6 +33,10 @@ class Note {
       return null;
   }
 
+  Note.idOnly(String id) {
+    this.id = id;
+  }
+
   Map<String, dynamic> toDocument() {
     return {
       "subject": subject,
@@ -39,5 +45,10 @@ class Note {
       "userid": userid,
       "crypted": crypted,
     };
+  }
+
+  void copyIDToClipboard() {
+    final data = ClipboardData(text: this.id);
+    Clipboard.setData(data);
   }
 }

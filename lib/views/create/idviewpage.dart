@@ -1,14 +1,14 @@
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:onetime_notes/generated/i18n.dart';
-import 'package:onetime_notes/link.dart';
+import 'package:onetime_notes/models/note.dart';
+import 'package:onetime_notes/services/linker.dart';
 import 'package:share/share.dart';
 
 class IDViewpage extends StatefulWidget {
-  final String id;
+  final Note note;
   final String subject;
-  IDViewpage({Key key, this.id, this.subject}) : super(key: key);
+  IDViewpage({Key key, this.note, this.subject}) : super(key: key);
 
   @override
   _IDViewpageState createState() => _IDViewpageState();
@@ -46,7 +46,7 @@ class _IDViewpageState extends State<IDViewpage> {
                     ListTile(
                       leading: Icon(Icons.assignment),
                       title: SelectableText(
-                        widget.id,
+                        widget.note.id,
                         style: Theme.of(context).textTheme.title.merge(
                             TextStyle(color: Theme.of(context).accentColor)),
                       ),
@@ -61,7 +61,7 @@ class _IDViewpageState extends State<IDViewpage> {
                           onPressed: copy,
                         ),
                         RaisedButton.icon(
-                          icon: Icon(Icons.share),
+                          icon: Icon(MdiIcons.share),
                           label: Text(I18n.of(context).shareLink),
                           onPressed: share,
                         ),
@@ -80,29 +80,18 @@ class _IDViewpageState extends State<IDViewpage> {
   }
 
   void copy() {
-    Clipboard.setData(ClipboardData(text: widget.id));
+    widget.note.copyIDToClipboard();
     var snackbar = SnackBar(
       content: Text(I18n.of(context).copiedID),
-      duration: Duration(seconds: 1),
       backgroundColor: Theme.of(context).accentColor,
     );
     _scaffold.currentState.showSnackBar(snackbar);
   }
 
   void share() async {
-    final params = DynamicLinkParameters(
-      androidParameters: androidParams,
-      iosParameters: iosParams,
-      socialMetaTagParameters: socialMetaParams,
-      uriPrefix: uriPrefix,
-      link: Uri.parse("https://otn.thezoey.de/note?id=" + widget.id),
-      dynamicLinkParametersOptions: DynamicLinkParametersOptions(
-        shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short,
-      ),
-    );
-    var link = await params.buildShortLink();
+    var link = await Linker.instance.buildDynamicLink(Note.idOnly(widget.note.id));
     await Share.share(
-      link.shortUrl.toString() + I18n.of(context).link_content + widget.id,
+      link.toString() + I18n.of(context).link_content + widget.note.id,
       subject: I18n.of(context).link_subject,
     );
   }

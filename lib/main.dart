@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:onetime_notes/appBuilder.dart';
 import 'package:onetime_notes/generated/i18n.dart';
+import 'package:onetime_notes/services/linker.dart';
 import 'package:onetime_notes/services/settings.dart';
 import 'package:onetime_notes/views/create/creationpage.dart';
 import 'package:onetime_notes/views/home/homepage.dart';
@@ -13,12 +14,10 @@ import 'package:onetime_notes/views/read/enteridpage.dart';
 import 'package:onetime_notes/views/settings/settingpage.dart';
 import 'package:onetime_notes/views/splash/splashscreen.dart';
 
-import 'link.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Settings().init();
-  await retrieveDynamicLink();
+  await Linker.instance.retrieveDynamicLink();
   runApp(MyApp());
 }
 
@@ -41,7 +40,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       _timerLink = Timer(const Duration(milliseconds: 1000), () {
-        retrieveDynamicLink();
+        Linker.instance.retrieveDynamicLink();
       });
     }
   }
@@ -68,7 +67,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           buttonColor: Colors.green,
           platform: TargetPlatform.iOS,
         ),
-        home: Splashscreen(link: initialLink),
+        home: Splashscreen(link: Linker.instance.initialLink),
         routes: {
           "/start": (_) => Homepage(),
           "/start/settings": (_) => Settingpage(),

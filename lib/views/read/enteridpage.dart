@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:onetime_notes/generated/i18n.dart';
@@ -16,14 +14,13 @@ class EnterIDpage extends StatefulWidget {
 
 class _EnterIDpageState extends State<EnterIDpage> {
   var _loading = false;
-  var _notified = false;
   var _controller = TextEditingController();
   final _scaffold = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() => setState((){}));
+    _controller.addListener(() => setState(() {}));
     if (widget.id != null) {
       _controller.text = widget.id;
     }
@@ -43,37 +40,42 @@ class _EnterIDpageState extends State<EnterIDpage> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(4),
         child: Column(
           children: <Widget>[
-            TextField(
-              controller: _controller,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: I18n.of(context).noteID,
-                hintText: "ABcDef1gH2Ijq3rsTuvW",
-                errorText: error,
-              ),
-            ),
-            SizedBox(height: 12),
             Card(
-              margin: EdgeInsets.all(0),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(I18n.of(context).openNoteInfotext),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: I18n.of(context).noteID,
+                        hintText: "ABcDef1gH2Ijq3rsTuvW",
+                        errorText: error,
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    Text(I18n.of(context).openNoteInfotext),
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: 12),
-            Builder(builder: (_) {
-              return _loading
+            SizedBox(height: 16),
+            Builder(
+              builder: (_) => _loading
                   ? CircularProgressIndicator()
                   : FloatingActionButton.extended(
                       icon: Icon(Icons.open_in_new),
                       label: Text(I18n.of(context).openNoteButtontext),
-                      backgroundColor: _controller.text.isEmpty ? Colors.grey : null,
+                      backgroundColor:
+                          _controller.text.isEmpty ? Colors.grey : null,
                       onPressed: _controller.text.isEmpty ? null : readDatabase,
-                    );
-            })
+                    ),
+            ),
           ],
         ),
       ),
@@ -81,9 +83,7 @@ class _EnterIDpageState extends State<EnterIDpage> {
   }
 
   String get error {
-    return _controller.text.isEmpty
-    ? I18n.of(context).enterIDPlease
-    : null;
+    return _controller.text.isEmpty ? I18n.of(context).enterIDPlease : null;
   }
 
   void _paste() async {
@@ -102,8 +102,7 @@ class _EnterIDpageState extends State<EnterIDpage> {
       );
       await Navigator.of(context).push(route);
       Navigator.pop(context);
-    }
-    else {
+    } else {
       var snackbar = SnackBar(
         content: Text(I18n.of(context).openNoteError),
         backgroundColor: Theme.of(context).errorColor,
@@ -113,18 +112,5 @@ class _EnterIDpageState extends State<EnterIDpage> {
     setState(() {
       _loading = false;
     });
-  }
-
-  void _checkNotification() {
-    if (widget.id != null && !_notified) {
-      var snackbar = SnackBar(
-        content: Text(I18n.of(context).openNotePasted),
-        backgroundColor: Theme.of(context).accentColor,
-      );
-      Timer(const Duration(milliseconds: 500), () {
-        _scaffold.currentState.showSnackBar(snackbar);
-      });
-      _notified = true;
-    }
   }
 }

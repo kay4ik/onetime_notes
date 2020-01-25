@@ -121,7 +121,7 @@ class _CreationpageState extends State<Creationpage> {
       _changeLoading();
       var route = MaterialPageRoute(
           builder: (_) => IDViewpage(
-                id: id,
+                note: Note.idOnly(id),
                 subject: note.subject,
               ),
           fullscreenDialog: true);
