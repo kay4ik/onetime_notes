@@ -36,11 +36,13 @@ class Linker {
 class LinkParameters {
   final uriPrefix = "https://otn.thezoey.de";
   final androidParams = AndroidParameters(
-      packageName: "de.thezoey.onetime_notes",
-      fallbackUrl: Uri.parse("https://google.com"));
+    packageName: "de.thezoey.onetime_notes",
+    fallbackUrl: Uri.parse("https://onetime.thezoey.de"),
+  );
 
   final iosParams = IosParameters(
     bundleId: "de.thezoey.onetimeNotes",
+    fallbackUrl: Uri.parse("https://onetime.thezoey.de"),
   );
 
   final socialMetaParams = SocialMetaTagParameters(
@@ -50,11 +52,10 @@ class LinkParameters {
     description: "Self-Destructing Messages",
   );
 
-
   DynamicLinkParameters get parameters => DynamicLinkParameters(
-    link: Uri.parse("https://otn.thezoey.de/"),
-    uriPrefix: uriPrefix,
-    androidParameters: androidParams,
-    iosParameters: iosParams,
-  );
+        link: Uri.parse("https://otn.thezoey.de/"),
+        uriPrefix: uriPrefix,
+        androidParameters: androidParams,
+        iosParameters: iosParams,
+      );
 }

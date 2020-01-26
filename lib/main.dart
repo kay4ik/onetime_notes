@@ -17,10 +17,10 @@ import 'package:onetime_notes/views/splash/splashscreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Settings().init();
-  await Linker.instance.retrieveDynamicLink();
   Crashlytics.instance.enableInDevMode = false;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  await Linker.instance.retrieveDynamicLink();
+  await Settings().init();
   runApp(MyApp());
 }
 
@@ -52,6 +52,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return AppBuilder(
       builder: (key, context) => MaterialApp(
         key: key,
+        debugShowCheckedModeBanner: false,
         title: 'Onetime Notes',
         themeMode: Settings().themeMode,
         darkTheme: ThemeData(
