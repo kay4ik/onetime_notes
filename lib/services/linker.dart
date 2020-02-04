@@ -19,11 +19,11 @@ class Linker {
 
   Future<Uri> buildDynamicLink(Note note) async {
     final parameter = DynamicLinkParameters(
-      androidParameters: params.androidParams,
-      iosParameters: params.iosParams,
+      androidParameters: params.androidParams(note.id),
+      iosParameters: params.iosParams(note.id),
       socialMetaTagParameters: params.socialMetaParams,
       uriPrefix: params.uriPrefix,
-      link: Uri.parse("https://otn.thezoey.de/note?id=" + note.id),
+      link: Uri.parse("https://otn.thezoey.de/#/read?id=" + note.id),
       dynamicLinkParametersOptions: DynamicLinkParametersOptions(
         shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short,
       ),
@@ -35,14 +35,14 @@ class Linker {
 
 class LinkParameters {
   final uriPrefix = "https://otn.thezoey.de";
-  final androidParams = AndroidParameters(
+  androidParams(String id) => AndroidParameters(
     packageName: "de.thezoey.onetime_notes",
-    fallbackUrl: Uri.parse("https://onetime.thezoey.de"),
+    fallbackUrl: Uri.parse(uriPrefix+"/#/read"+"?id=$id"),
   );
 
-  final iosParams = IosParameters(
+  iosParams(String id) => IosParameters(
     bundleId: "de.thezoey.onetimeNotes",
-    fallbackUrl: Uri.parse("https://onetime.thezoey.de"),
+    fallbackUrl: Uri.parse(uriPrefix+"/#/read"+"?id=$id"),
   );
 
   final socialMetaParams = SocialMetaTagParameters(
@@ -51,11 +51,4 @@ class LinkParameters {
     title: "Onetime Notes",
     description: "Self-Destructing Messages",
   );
-
-  DynamicLinkParameters get parameters => DynamicLinkParameters(
-        link: Uri.parse("https://otn.thezoey.de/"),
-        uriPrefix: uriPrefix,
-        androidParameters: androidParams,
-        iosParameters: iosParams,
-      );
 }
