@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_admob/flutter_native_admob.dart';
 import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/services/database.dart';
 import 'package:onetime_notes/views/read/viewnotepage.dart';
@@ -39,7 +40,7 @@ class _EnterIDpageState extends State<EnterIDpage> {
           )
         ],
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(4),
         child: Column(
           children: <Widget>[
@@ -75,6 +76,10 @@ class _EnterIDpageState extends State<EnterIDpage> {
                           _controller.text.isEmpty ? Colors.grey : null,
                       onPressed: _controller.text.isEmpty ? null : readDatabase,
                     ),
+            ),
+            SizedBox(height: 16),
+            NativeAdmobBannerView(
+              adUnitID: "ca-app-pub-8579503352749283/3799878478",
             ),
           ],
         ),

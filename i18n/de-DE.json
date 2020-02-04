@@ -1,4 +1,6 @@
 {
+  "INFO_four": "Onetime Notes ist kostenlos und soll es auch bleiben! Damit wir auch was von der Entwicklung haben, zeigen wir euch Werbung an. Wir geben uns mühe dass die Werbung nicht nervt oder stört.",
+  "INFO_fourTitle": "Werbung",
   "INFO_one": "Du hast die Möglichkeit Nachrichten zu erstellen, die entgültig gelöscht werden sobald sie gelesen werden.\\nNachdem du die Nachricht erstellt hast erhälst du den Code der Nachricht. Teile diesen Code mit dem Empfänger, damit er die Nachricht öffnen und lesen kann. Oder teile die Nachricht mit einem Link.",
   "INFO_oneTitle": "Selbstzerstörende Nachrichten",
   "INFO_three": "Wir sammeln keine Daten von dir oder deinem Smartphone! Wir erstellen eine Anonyme ID um zu identifizieren, welche Nachrichten von dir erstellt wurden. Diese ID ist für niemenden ersichtlich und kann nicht mit dir in verbindung gebracht werden! Falls du dies trotzdem nicht möchtest kannst du dieses Feature in den Einstellungen deaktivieren.",
@@ -10,7 +12,7 @@
   "copiedID": "ID kopiert!",
   "copyID": "ID kopieren",
   "createNote": "Eine neue Notiz erstellen",
-  "createNoteFillOut": "Fülle den Betreff und die Nachricht aus.",
+  "createNoteFillOut": "Fülle die Nachricht aus.",
   "createNoteFinInfo": "Sende die ID oder den Link an den Empfänger! Die Nachricht wird gelöscht, sobald Sie vom Empfänger geöffnet wird.",
   "createNoteMsgHint": "Hallo, dies sind die vertraulichen Daten …",
   "createNoteSubHint": "Der Betreff ist lesbar!",
@@ -32,6 +34,7 @@
   "moreInfo": "Mehr Informationen dazu",
   "noInternetConnection": "Keine Internetverbindung",
   "noInternetConnectionInfo": "Du musst mit dem Internet verbunden sein, um Onetime Notes zu nutzen.",
+  "noSubject": "Kein Betreff",
   "noteID": "Notiz ID",
   "openNote": "Eine Notiz öffnen",
   "openNoteButtontext": "Öffnen und löschen",

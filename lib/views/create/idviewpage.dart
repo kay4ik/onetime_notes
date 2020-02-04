@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_admob/flutter_native_admob.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/models/note.dart';
@@ -24,8 +25,8 @@ class _IDViewpageState extends State<IDViewpage> {
       appBar: AppBar(
         title: Text(I18n.of(context).createdNote),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -33,7 +34,7 @@ class _IDViewpageState extends State<IDViewpage> {
               margin: EdgeInsets.all(0),
               child: ListTile(
                 leading: Icon(Icons.title),
-                title: Text(widget.subject),
+                title: Text(widget.subject.isNotEmpty ? widget.subject : I18n.of(context).noSubject),
               ),
             ),
             SizedBox(height: 8),
@@ -44,12 +45,13 @@ class _IDViewpageState extends State<IDViewpage> {
                 child: Column(
                   children: <Widget>[
                     ListTile(
-                      leading: Icon(Icons.assignment),
+                      leading: Icon(MdiIcons.idCard),
                       title: SelectableText(
                         widget.note.id,
                         style: Theme.of(context).textTheme.title.merge(
                             TextStyle(color: Theme.of(context).accentColor)),
                       ),
+                     subtitle: Text(I18n.of(context).noteID),
                     ),
                     SizedBox(height: 8),
                     Row(
@@ -72,7 +74,9 @@ class _IDViewpageState extends State<IDViewpage> {
               ),
             ),
             SizedBox(height: 8),
-            Text(I18n.of(context).createNoteFinInfo)
+            Text(I18n.of(context).createNoteFinInfo),
+            SizedBox(height: 16),
+            NativeAdmobBannerView(adUnitID: "ca-app-pub-8579503352749283/3799878478"),
           ],
         ),
       ),
