@@ -38,7 +38,7 @@ class _InfopageState extends State<Infopage> {
               margin: EdgeInsets.only(top: 8),
               child: CirclePageIndicator(
                 currentPageNotifier: _notifierer,
-                itemCount: 3,
+                itemCount: 4,
                 selectedDotColor: Theme.of(context).accentColor,
               ),
             ),
@@ -66,6 +66,11 @@ class _InfopageState extends State<Infopage> {
                       title: I18n.of(context).INFO_threeTitle,
                       info: I18n.of(context).INFO_three,
                     ),
+                    Infocard(
+                      illustration: UnDrawIllustration.mobile_images,
+                      title: I18n.of(context).INFO_fourTitle,
+                      info: I18n.of(context).INFO_four,
+                    )
                   ],
                 ),
               ),

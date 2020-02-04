@@ -32,6 +32,10 @@ class I18n implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
+  /// "Onetime Notes ist kostenlos und soll es auch bleiben! Damit wir auch was von der Entwicklung haben, zeigen wir euch Werbung an. Wir geben uns mühe dass die Werbung nicht nervt oder stört."
+  String get INFO_four => "Onetime Notes ist kostenlos und soll es auch bleiben! Damit wir auch was von der Entwicklung haben, zeigen wir euch Werbung an. Wir geben uns mühe dass die Werbung nicht nervt oder stört.";
+  /// "Werbung"
+  String get INFO_fourTitle => "Werbung";
   /// "Du hast die Möglichkeit Nachrichten zu erstellen, die entgültig gelöscht werden sobald sie gelesen werden.\nNachdem du die Nachricht erstellt hast erhälst du den Code der Nachricht. Teile diesen Code mit dem Empfänger, damit er die Nachricht öffnen und lesen kann. Oder teile die Nachricht mit einem Link."
   String get INFO_one => "Du hast die Möglichkeit Nachrichten zu erstellen, die entgültig gelöscht werden sobald sie gelesen werden.\nNachdem du die Nachricht erstellt hast erhälst du den Code der Nachricht. Teile diesen Code mit dem Empfänger, damit er die Nachricht öffnen und lesen kann. Oder teile die Nachricht mit einem Link.";
   /// "Selbstzerstörende Nachrichten"
@@ -54,8 +58,8 @@ class I18n implements WidgetsLocalizations {
   String get copyID => "ID kopieren";
   /// "Eine neue Notiz erstellen"
   String get createNote => "Eine neue Notiz erstellen";
-  /// "Fülle den Betreff und die Nachricht aus."
-  String get createNoteFillOut => "Fülle den Betreff und die Nachricht aus.";
+  /// "Fülle die Nachricht aus."
+  String get createNoteFillOut => "Fülle die Nachricht aus.";
   /// "Sende die ID oder den Link an den Empfänger! Die Nachricht wird gelöscht, sobald Sie vom Empfänger geöffnet wird."
   String get createNoteFinInfo => "Sende die ID oder den Link an den Empfänger! Die Nachricht wird gelöscht, sobald Sie vom Empfänger geöffnet wird.";
   /// "Hallo, dies sind die vertraulichen Daten …"
@@ -98,6 +102,8 @@ class I18n implements WidgetsLocalizations {
   String get noInternetConnection => "Keine Internetverbindung";
   /// "Du musst mit dem Internet verbunden sein, um Onetime Notes zu nutzen."
   String get noInternetConnectionInfo => "Du musst mit dem Internet verbunden sein, um Onetime Notes zu nutzen.";
+  /// "Kein Betreff"
+  String get noSubject => "Kein Betreff";
   /// "Notiz ID"
   String get noteID => "Notiz ID";
   /// "Eine Notiz öffnen"
@@ -158,6 +164,12 @@ class _I18n_de_DE extends I18n {
 class _I18n_en_US extends I18n {
   const _I18n_en_US();
 
+  /// "Onetime Notes is free and should remain so! So that the development is profitable we show ads in the app. We try that the ads are not disturbing or annoying you."
+  @override
+  String get INFO_four => "Onetime Notes is free and should remain so! So that the development is profitable we show ads in the app. We try that the ads are not disturbing or annoying you.";
+  /// "Advertising"
+  @override
+  String get INFO_fourTitle => "Advertising";
   /// "You have the option to create messages that will be permanently deleted as soon as they are read. After you have created the message, you will receive the code of the message. Share this code with the recipient so that they can open and read the message. Or share the message with a link."
   @override
   String get INFO_one => "You have the option to create messages that will be permanently deleted as soon as they are read. After you have created the message, you will receive the code of the message. Share this code with the recipient so that they can open and read the message. Or share the message with a link.";
@@ -191,9 +203,9 @@ class _I18n_en_US extends I18n {
   /// "Create a new note"
   @override
   String get createNote => "Create a new note";
-  /// "Fill in the subject and the message."
+  /// "Please fill in the message."
   @override
-  String get createNoteFillOut => "Fill in the subject and the message.";
+  String get createNoteFillOut => "Please fill in the message.";
   /// "Share the link or the ID to the receiver. The message will be deleted instantly if the receiver opens it."
   @override
   String get createNoteFinInfo => "Share the link or the ID to the receiver. The message will be deleted instantly if the receiver opens it.";
@@ -257,6 +269,9 @@ class _I18n_en_US extends I18n {
   /// "You have to be connected to the Internet to use Onetime Notes."
   @override
   String get noInternetConnectionInfo => "You have to be connected to the Internet to use Onetime Notes.";
+  /// "No subject"
+  @override
+  String get noSubject => "No subject";
   /// "Note ID"
   @override
   String get noteID => "Note ID";

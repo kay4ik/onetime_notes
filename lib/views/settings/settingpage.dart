@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_admob/flutter_native_admob.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:onetime_notes/appBuilder.dart';
 import 'package:onetime_notes/generated/i18n.dart';
@@ -6,6 +7,7 @@ import 'package:onetime_notes/services/settings.dart';
 import 'package:onetime_notes/services/userRepository.dart';
 import 'package:onetime_notes/views/info/infopage.dart';
 import 'package:undraw/undraw.dart';
+import 'package:onetime_notes/extensions.dart';
 
 class Settingpage extends StatefulWidget {
   Settingpage({Key key}) : super(key: key);
@@ -19,6 +21,7 @@ class _SettingpageState extends State<Settingpage> {
   Settings _settings = Settings();
   UserRepository _repo = UserRepository();
   String uid = "";
+  NativeAdController _adController;
 
   @override
   void initState() {
@@ -70,6 +73,13 @@ class _SettingpageState extends State<Settingpage> {
                             value: Settings().themeMode,
                             onChanged: (v) {
                               Settings().themeMode = v;
+                              print(_adController == null);
+                              if (_adController != null)
+                                _adController.setStyle(
+                                  _settings
+                                      .appBrightness(context)
+                                      .toBannerStyle(),
+                                );
                               AppBuilder.of(context).rebuild();
                             },
                             items: ThemeMode.values.map((i) {
@@ -119,6 +129,14 @@ class _SettingpageState extends State<Settingpage> {
                           onTap: moreInfo,
                         ),
                       ],
+                    ),
+                  ),
+                  Card(
+                    child: NativeAdmobBannerView(
+                      adUnitID: "ca-app-pub-8579503352749283/3799878478",
+                      style: _settings.appBrightness(context).toBannerStyle(),
+                      showMedia: false,
+                      onCreate: (controller) => _adController = controller,
                     ),
                   ),
                 ],

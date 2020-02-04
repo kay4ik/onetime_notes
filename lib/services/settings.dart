@@ -22,4 +22,15 @@ class Settings {
   bool get createUser => _prefs.getBool("OTN_createUser") ?? true;
   
   //bool _isAvailable(String key) => _prefs?.get(key) != null;
+
+  Brightness appBrightness(BuildContext context) {
+    switch (themeMode) {
+      case ThemeMode.dark:
+        return Brightness.dark;
+      case ThemeMode.light:
+        return Brightness.light;
+      default:
+        return MediaQuery.of(context).platformBrightness;
+    }
+  }
 }

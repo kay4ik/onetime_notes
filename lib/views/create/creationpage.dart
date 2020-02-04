@@ -95,7 +95,7 @@ class _CreationpageState extends State<Creationpage> {
   }
 
   void validate() {
-    if (_subjectF.text.isNotEmpty && _contentF.text.isNotEmpty)
+    if (_contentF.text.isNotEmpty)
       send();
     else {
       var snackbar = SnackBar(

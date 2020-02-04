@@ -1,4 +1,6 @@
 {
+  "INFO_four": "Onetime Notes is free and should remain so! So that the development is profitable we show ads in the app. We try that the ads are not disturbing or annoying you.",
+  "INFO_fourTitle": "Advertising",
   "INFO_one": "You have the option to create messages that will be permanently deleted as soon as they are read. After you have created the message, you will receive the code of the message. Share this code with the recipient so that they can open and read the message. Or share the message with a link.",
   "INFO_oneTitle": "Self-destructive messages",
   "INFO_three": "We do not collect data from you or your smartphone! We create an anonymous ID to identify which messages you have created. This ID is not visible to anyone and cannot be associated with you! If you still don't want this, you can deactivate this feature in the settings.",
@@ -10,7 +12,7 @@
   "copiedID": "Copied ID!",
   "copyID": "Copy ID",
   "createNote": "Create a new note",
-  "createNoteFillOut": "Fill in the subject and the message.",
+  "createNoteFillOut": "Please fill in the message.",
   "createNoteFinInfo": "Share the link or the ID to the receiver. The message will be deleted instantly if the receiver opens it.",
   "createNoteMsgHint": "Hey! This is the secret information about ...",
   "createNoteSubHint": "The subject is readable!",
@@ -32,6 +34,7 @@
   "moreInfo": "More information about it",
   "noInternetConnection": "No internet connection",
   "noInternetConnectionInfo": "You have to be connected to the Internet to use Onetime Notes.",
+  "noSubject": "No subject",
   "noteID": "Note ID",
   "openNote": "Open a Note",
   "openNoteButtontext": "Open and delete",

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_admob/flutter_native_admob.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:onetime_notes/generated/i18n.dart';
 import 'package:onetime_notes/models/note.dart';
@@ -43,25 +44,35 @@ class _NotelistpageState extends State<Notelistpage> {
               builder: (context, snap) {
                 if (snap.hasData) {
                   return ListView.builder(
-                      padding: EdgeInsets.all(8),
-                      itemCount: snap.data.length + 1,
+                      itemCount: snap.data.length + 2,
                       itemBuilder: (context, i) {
                         if (i == 0) {
-                          return Card(
-                            child: Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Text(I18n.of(context).unreadNotesInfo),
+                          return NativeAdmobBannerView(
+                            adUnitID: "ca-app-pub-8579503352749283/3799878478",
+                            showMedia: false,
+                          );
+                        } else if (i == 1) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              child: Padding(
+                                padding: EdgeInsets.all(8),
+                                child: Text(I18n.of(context).unreadNotesInfo),
+                              ),
                             ),
                           );
                         } else {
-                          var note = snap.data[i - 1] as Note;
-                          return Card(
-                            child: ListTile(
-                              title: Text(note.subject),
-                              subtitle: Text(DateHelper.writeDate(note.create)),
-                              trailing: IconButton(
-                                icon: Icon(MdiIcons.fileSettingsOutline),
-                                onPressed: () => show(note),
+                          var note = snap.data[i - 2] as Note;
+                          return Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            child: Card(
+                              child: ListTile(
+                                title: Text(note.subject.isNotEmpty ? note.subject : I18n.of(context).noSubject),
+                                subtitle: Text(DateHelper.writeDate(note.create)),
+                                trailing: IconButton(
+                                  icon: Icon(MdiIcons.fileSettingsOutline),
+                                  onPressed: () => show(note),
+                                ),
                               ),
                             ),
                           );
@@ -95,7 +106,7 @@ class _NotelistpageState extends State<Notelistpage> {
                 children: <Widget>[
                   ListTile(
                     leading: Icon(MdiIcons.notebookOutline),
-                    title: Text(note.subject),
+                    title: Text(note.subject.isNotEmpty ? note.subject : I18n.of(context).noSubject),
                     subtitle: Text(note.crypted
                         ? I18n.of(context).crypted
                         : I18n.of(context).cryptedNot),
